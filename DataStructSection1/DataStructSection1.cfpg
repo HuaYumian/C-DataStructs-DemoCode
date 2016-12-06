@@ -1,3 +1,7 @@
 <Projects version="2.0">
 	<Project active="1">DataStructSection1.cfp</Project>
+	<File active="0">main.c</File>
+	<File active="1">OrderList.c</File>
+	<File active="0">OrderList.h</File>
+	<File active="0">Includes.h</File>
 </Projects>
