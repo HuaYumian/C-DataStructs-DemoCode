@@ -8,27 +8,15 @@
 
 int main(int argc, char *argv[])
 {
-	ORDER_LIST_PTR L;
-	int i;
-	printf("Hello C-Free!\n");
+	clock_t begin,end;
+	double cost_time=0;
+	begin=clock();
+	/*´úÂë²âÊÔ*/
+	LinkList_Print2Test();
 	
-	if(Init_OrderList(L)){
-		Insert_OrderList(L,1,101);	
-		Insert_OrderList(L,1,102);
-		Insert_OrderList(L,1,103);
-		Insert_OrderList(L,1,104);
-	}
-	
-	printf("-------------------------------\n");
-	printf("DebugNote:\r\n");
-	printf("\tlength=%d\n",L->length);	
-	printf("\tlistSize=%d\n",L->listSize);
-	printf("-------------------------------\n");
-	
-	for(i=0;i<L->listSize;i++){
-		printf("element[%d]=%d\n",i,L->element[i]);	
-	}
-	
+	end=clock();
+	cost_time=(double)(end-begin)/CLOCKS_PER_SEC;
+	printf("³ÌÐòºÄÊ±£º%lf seconds\n\n", cost_time);
 	return 0;
 }
 
