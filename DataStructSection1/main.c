@@ -12,7 +12,8 @@ int main(int argc, char *argv[])
 	double cost_time=0;
 	begin=clock();
 	/*´úÂë²âÊÔ*/
-	LinkList_Print2Test();
+	SequenceList_Test();
+
 	
 	end=clock();
 	cost_time=(double)(end-begin)/CLOCKS_PER_SEC;

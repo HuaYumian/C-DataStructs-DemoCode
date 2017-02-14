@@ -1,7 +1,7 @@
 #ifndef __LINKLIST_H
 #define __LINKLIST_H
 
-typedef int ElementType;
+
 
 typedef struct LNode{
 	ElementType data;
@@ -15,6 +15,9 @@ extern bool LinkList_Delete(LINKLIST linklist,int pos);
 extern void printAllDatas(LINKLIST linklist);
 extern ElementType LinkList_Query(LINKLIST linklist,int pos);
 extern void  LinkList_Print2Test(void); 
+
+
+
 #endif
 
 

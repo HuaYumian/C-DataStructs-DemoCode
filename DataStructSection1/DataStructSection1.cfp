@@ -5,21 +5,30 @@
 <TargetType>exe</TargetType>
 <Folder name="Source Files">
 	<File>main.c</File>
-	<File>OrderList.c</File>
+	<File>SequenceList.c</File>
 	<File>LinkList.c</File>
 </Folder>
 <Folder name="Header Files">
-	<File>OrderList.h</File>
+	<File>SequenceList.h</File>
 	<File>Includes.h</File>
 	<File>LinkList.h</File>
 </Folder>
-<Folder name="Other Files">
+<Folder name="Global Files">
+	<File>defines.h</File>
 </Folder>
-<Attribute topline="7" x="37" y="24">main.c</Attribute>
-<Attribute topline="43" x="27" y="58">OrderList.c</Attribute>
-<Attribute topline="1" x="1" y="7">OrderList.h</Attribute>
-<Attribute topline="1" x="20" y="8">Includes.h</Attribute>
+<Attribute topline="7" x="22" y="15">main.c</Attribute>
+<Attribute topline="176" x="3" y="133">SequenceList.c</Attribute>
+<Attribute topline="37" x="11" y="43">LinkList.c</Attribute>
+<Attribute topline="13" x="49" y="20">SequenceList.h</Attribute>
+<Attribute topline="1" x="26" y="15">Includes.h</Attribute>
+<Attribute topline="1" x="20" y="8">LinkList.h</Attribute>
+<Attribute topline="1" x="24" y="5">defines.h</Attribute>
 <FolderState>111</FolderState>
+<Breakpoint>
+	<File>main.c</File>
+	<Line>15</Line>
+	<Condition></Condition>
+</Breakpoint>
 <DefConfig>mingw5</DefConfig>
 <Builder name="mingw5" type="MinGW" version="1.0">
 	<TargetName>DataStructSection1</TargetName>

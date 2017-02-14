@@ -23,9 +23,9 @@ LINKLIST LinkList_Creat(void)
 	headNode->data=0; 
 	
 	//printf("headPtr = %p\n",headPtr);
-	//printf("headNode = %p\n",headNode);
+	printf("headNode = %p\n",headNode);
 	//printf("headNode->ptr = %p\n",headNode->ptr);
-	//printf("headNode->data = %d\n",headNode->data);
+	printf("headNode->data = %d\n",headNode->data);
 	
 	return headNode;
 	
@@ -59,7 +59,7 @@ LINKLIST LinkList_Insert(LINKLIST linklist,int pos,ElementType data)
 		s->data = data;
 		linklist->data++;                                                       //长度+1，长度信息保存在头结点的数据域 
 		s->ptr=NULL;                                                            //没有直接后继，所以最后一个节点的指针域为空 
-		//printf("if-malloc_addr=%p\n",s);
+		printf("if-malloc_addr=%p\n",s);
 	} 
 	else{                                                                       //说明有直接后继元素 
 		s=(LINKLIST)malloc(sizeof(LNODE));
@@ -67,7 +67,7 @@ LINKLIST LinkList_Insert(LINKLIST linklist,int pos,ElementType data)
 		temPtr->ptr=s;
 		s->data=data;
 		linklist->data++;                                                       //长度+1，长度信息保存在头结点的数据域  
-		//printf("el-malloc_addr=%p\n",s);
+		printf("el-malloc_addr=%p\n",s);
 	}
 	return linklist;	
 }
@@ -93,7 +93,7 @@ bool LinkList_Delete(LINKLIST linklist,int pos)
 	for(i=0;i<pos-1;i++){                                                       //获取第pos个位置的直接前驱结点 
 		tmp=tmp->ptr;
 	} 
-	if(pos == linklist->data){
+	if(pos == linklist->data){      //pos==链表长度，头结点的数据域保存了长度信息                                  
 		free(tmp->ptr);
 		tmp->ptr=NULL;
 		linklist->data--;
@@ -136,6 +136,23 @@ ElementType LinkList_Query(LINKLIST linklist,int pos)
 	 
 } 
 
+/**
+ *@Function: 合并2个链表 
+ *@params  : mergeModel合并模式，true升序；false降序 
+ *@return  :
+ *@note    : 首先创建一个空表，再对2个要进行比较的链表的元素进行大小判断，存入新建的空表 
+ */
+void LinkList_Merge(LINKLIST list1,LINKLIST list2,bool mergeModel)
+{
+	LINKLIST newLinkList=NULL;
+	LNODE *tmp1;
+	LNODE *tmp2;
+	
+	
+	newLinkList=LinkList_Creat(); 
+	
+		
+}
  
 /**
  *@Function: 遍历输出链表元素 
@@ -185,6 +202,9 @@ void LinkList_Print2Test(void)
 	LinkList_Delete(linklist,8);
 	LinkList_Delete(linklist,9);
 	LinkList_Delete(linklist,1);
+	
+	LinkList_Insert(linklist,2,2119);
+	LinkList_Insert(linklist,5,2134);
 	
 	printAllDatas(linklist);
 }
