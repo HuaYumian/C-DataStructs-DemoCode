@@ -34,88 +34,7 @@ Status InitList_Sequence(SEQUENCELIST_Ptr spe_ptr)
 	spe_ptr->listSize=SEQUENCELIST_INIT_SIZE;
 	return OK;
 }
-/**
- *@Function: 删除L 
- *@params  :
- *@return  :
- *@note    : void free(void *ptr)用来释放动态分配的内存空间，比如malloc、realloc、calloc 
- *如果ptr所指的空间不是由上述那三个函数所分配的空间，会引发意想不到的错误
- *如果ptr为NULL，那么free不会用任何作用
- *需要注意点的是，free不会改变ptr的值，所以调用完free之后要把ptr置为NULL（不是必须） 
- *被释放的内存虽然可以被访问，但是已经不再安全了
- 当free一块内存后，free(即运行库)会将这块内存标记为未使用，下次有可能会将这块内存分配出去。
- 但这块内存对进程来说仍然是可以读写的，因为运行库已经向操作系统申请，自己来管理这块内存了。 
- */
- Status DestroyList_Sequence(SEQUENCELIST_Ptr L)
- {
- 	if(L->element == NULL)
-	{
-		return Error;
-	}
-	//free(L);//此处要注意，malloc函数分配的是L->element
-	free(L->element); 
-	L->length = 0;
-	L->listSize=0;
-	L->element=NULL;
 
-	return OK;
-
- } 
- /**
- *@Function: 清空链表L，即将L重置为空表  
- *@params  :  
- *@return  :
- *@note    : 置为空表，空表的概念就是长度为0的表,至于表内元素，根据实际情况来选择是否清0，或者FF 
- */
- Status ClearList_Sequence(SEQUENCELIST_Ptr L)
- {
- 	int i=0;
- 	if(!L->element)
-	{
-		return Error;	
-	}
-	/*for(i=0;i< L->length;i++)
-	{
-		L->element[i]=0；		
-	}*/
-	L->length = 0;
-	
-	return OK;
-	
- }
-  /**
- *@Function: 判断表是否为空表，如果为空表则返回true，否则返回false 
- *@params  :  
- *@return  :
- *@note    : 
- */
- bool ListEmpty_Sequence(SEQUENCELIST_Ptr L)
- {
- 	//这个函数是我我的第一思路，显然，是不准确的。何为空表？ 
- /*	if(!L->element)//如果把这个条件认为是空表的条件的话，显然一个已经被分配过内存的L，它的L->element!=NULL,但是它有可能是是空表，因为长度为0 
-	{              //还有一种情况是：如果一个未被分配存储空间的L，那么它的L->element=NULL，这根本不是 
-		return true;	
-	}
-	else
-		return false;
-	return false;*/
-	
-	//另一思路就是直接判断L的长度是否为0
-	if(L->element)//先判断表是否存在 
-	{
-		if(L->length==0)
-		{
-			return true;
-		}
-		else{
-			return false;
-		}
-	} 
-	return false;
- } 
- 
- 
- 
 /**
  *@Function: 插入元素，若表长为n，则时间复杂度O(n)  
  *@params  : L线性表, pos位置, e 元素 
@@ -130,7 +49,7 @@ Status ListInsert_Sequence(SEQUENCELIST_Ptr L,int pos,ElementType e)
 	int i;
 	ElementType *newBase=NULL;
 	
-	if(pos<1 || pos > (L->length+1) || !L->element)
+	if(pos<1 || pos > (L->length+1))
 	{
 		return Error;
 	}
@@ -205,23 +124,14 @@ Status ListDelete_Sequence(SEQUENCELIST_Ptr L,int pos)
 	return OK;
 }
  /**
- *@Function: 返回L中第1个与e相等的数据元素的位序，若这个元素不存在，则返回0 
+ *@Function: 返回L中第1个与e满足关系compare()的数据元素的位序，若这个元素不存在，则返回0 
  *@params  :
  *@return  : 
  *@note    : 初始条件：L已经存在，compare()是数据元素判定函数 
  */
  int LocateElement_Sequence(SEQUENCELIST_Ptr L,ElementType e)
  {
- 	int i=0;
  	
- 	for(i=0;i<L->length;i++)
- 	{
- 		if(L->element[i]==e)
-	    {
- 			return i+1;
- 		}	
- 	} 
- 	return 0;
  } 
  
  /**
@@ -230,14 +140,12 @@ Status ListDelete_Sequence(SEQUENCELIST_Ptr L,int pos)
  */ 
 void SequenceList_Test(void)
 {
-	SEQUENCELIST L,L1;//SEQUENCELIST_Ptr 此处如果定义结构体指针的话，不妥，结构体指针需要初始化，结构体成员指针也要初始化 
-	int i,a,b;	
+	SEQUENCELIST L;//SEQUENCELIST_Ptr 此处如果定义结构体指针的话，不妥，结构体指针需要初始化，结构体成员指针也要初始化 
+	int i;	
 	printf("----------------------------------------------------\n");
 	if(InitList_Sequence(&L))
 	{
 		printf("InitListSequence address : %p\n",L.element);
-		
-		
 		ListInsert_Sequence(&L,1,101);
 		ListInsert_Sequence(&L,1,201);	
 		ListInsert_Sequence(&L,1,301);
@@ -258,50 +166,37 @@ void SequenceList_Test(void)
 		ListInsert_Sequence_2(&L,1,8001);	
 		ListInsert_Sequence_2(&L,1,9001);
 		ListInsert_Sequence_2(&L,1,1101);	
-		ListInsert_Sequence_2(&L,1,2201);	
-		
-		
-		a=LocateElement_Sequence(&L,2201);
-		b=LocateElement_Sequence(&L,9010);	
+		ListInsert_Sequence_2(&L,1,2201);		
 
 	}	
+	printf("\tlength=%d\n",L.length);	
+	printf("\tlistSize=%d\n",L.listSize);
 	
-	printf("//--遍历操作--\n");
+	printf("------------------插入元素------------------\n");
+	
 	for(i=0;i<L.length	;i++){
 		printf("element[%d] = %d, addr = %p\n",i,L.element[i],&(L.element[i]));	
-	}
-	printf("----------------------------------------------------\n");
-	printf("//--查找与e相等的位序--\n");
-	printf("a = %d\n",a);	
-	printf("b = %d\n",b);
-	printf("----------------------------------------------------\n");
-	/*printf("//--删除L--\n");
-	if(DestroyList_Sequence(&L))
-	{
-		printf("删除链表成功！！！\n");	
-	}
-	if(!ListInsert_Sequence(&L,1,2345))
-	{
-		printf("表不存在！！！\n");
-		printf("表不存在 = %d！！！\n",L.length);
-	}
-	printf("InitListSequence address : %p\n",L.element);
-	for(i=0;i<L.length	;i++){
-		printf("element[%d] = %d, addr = %p\n",i,L.element[i],&(L.element[i]));	
-	}*/
-	printf("----------------------------------------------------\n");	
-	if(ListEmpty_Sequence(&L1)==false)
-	{
-		printf("L1 不存在！！！\n");	
-	}
-	if(ListEmpty_Sequence(&L)==false)
-	{
-		printf("L 不为空！！！\n");	
 	}	
+	
+	printf("------------------删除元素------------------\n");
+	ListDelete_Sequence(&L,1);
+	printf("\tlength=%d\n",L.length);
+	
+	for(i=0;i<L.length	;i++){
+		printf("element[%d] = %d, addr = %p\n",i,L.element[i],&(L.element[i]));	
+	}	
+	
+	printf("------------------删除元素------------------\n");
+	ListDelete_Sequence(&L,5);
+	printf("\tlength=%d\n",L.length);
+	
+	for(i=0;i<L.length	;i++){
+		printf("element[%d] = %d, addr = %p\n",i,L.element[i],&(L.element[i]));	
+	}
 	printf("----------------------------------------------------\n");
-		
 }
  
+
 
 
 
