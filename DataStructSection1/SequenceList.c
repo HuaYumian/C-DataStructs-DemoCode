@@ -87,7 +87,7 @@ Status InitList_Sequence(SEQUENCELIST_Ptr spe_ptr)
  *@Function: 判断表是否为空表，如果为空表则返回true，否则返回false 
  *@params  :  
  *@return  :
- *@note    : 
+ *@note    : 其实应该有个初始化条件：链表L已经存在 
  */
  bool ListEmpty_Sequence(SEQUENCELIST_Ptr L)
  {
@@ -114,8 +114,64 @@ Status InitList_Sequence(SEQUENCELIST_Ptr spe_ptr)
 	return false;
  } 
  
+ /**
+ *@Function: 返回链表中数据的长度 
+ *@params  :  
+ *@return  :
+ *@note    : 
+ */
+ int ListLength_Sequence(SEQUENCELIST_Ptr L)
+ {
+	return	L->length; 
+ } 
  
+/**
+ *@Function: 返回链表中数据的长度 
+ *@params  :  
+ *@return  :  pos位置的元素 
+ *@note    :  第pos个位置的元素 
+ */ 
+ElementType GetElem_Sequence(SEQUENCELIST_Ptr L,int pos)
+{
+	if(L->length < 1 || pos > L->length)
+	{
+		return Error;	
+	}	
+	return L->element[pos-1];
+} 
+
+ /**
+ *@Function: 返回L中第1个与e相等的数据元素的位序，若这个元素不存在，则返回0 
+ *@params  :
+ *@return  : 
+ *@note    : 初始条件：L已经存在，compare()是数据元素判定函数 
+ */
+ int LocateElement_Sequence(SEQUENCELIST_Ptr L,ElementType e)
+ {
+ 	int i=0;
+ 	
+ 	for(i=0;i<L->length;i++)
+ 	{
+ 		if(L->element[i]==e)
+	    {
+ 			return i+1;
+ 		}	
+ 	} 
+ 	return 0;
+ } 
+
+ /**
+ *@Function: 返回链表中数据的长度 
+ *@params  :  
+ *@return  :
+ *@note    : 
+ */
+ void PriorElem(SEQUENCELIST_Ptr L,ElementType e, ElementType *ptr)
+ {
+ 	
+ } 
  
+  
 /**
  *@Function: 插入元素，若表长为n，则时间复杂度O(n)  
  *@params  : L线性表, pos位置, e 元素 
@@ -204,25 +260,7 @@ Status ListDelete_Sequence(SEQUENCELIST_Ptr L,int pos)
 	
 	return OK;
 }
- /**
- *@Function: 返回L中第1个与e相等的数据元素的位序，若这个元素不存在，则返回0 
- *@params  :
- *@return  : 
- *@note    : 初始条件：L已经存在，compare()是数据元素判定函数 
- */
- int LocateElement_Sequence(SEQUENCELIST_Ptr L,ElementType e)
- {
- 	int i=0;
- 	
- 	for(i=0;i<L->length;i++)
- 	{
- 		if(L->element[i]==e)
-	    {
- 			return i+1;
- 		}	
- 	} 
- 	return 0;
- } 
+
  
  /**
  *@Function: 线性表测试
