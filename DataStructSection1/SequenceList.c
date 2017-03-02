@@ -161,16 +161,45 @@ ElementType GetElem_Sequence(SEQUENCELIST_Ptr L,int pos)
  } 
 
  /**
- *@Function: 返回链表中数据的长度 
+ *@Function: 返回元素e的直接前驱 
  *@params  :  
  *@return  :
- *@note    : 
+ *@note    : e是L的数据元素，且不是第一个，则用ptr返回它的前驱，否则操作失败ptr无定义 
  */
- void PriorElem(SEQUENCELIST_Ptr L,ElementType e, ElementType *ptr)
+ ElementType* PriorElem_Sequence(SEQUENCELIST_Ptr L,ElementType e)
  {
+ 	ElementType *ptr=NULL;
+ 	int tmp=0;
+ 	tmp=LocateElement_Sequence(L,e);
+ 	if(tmp <= 1)
+ 	{
+	 	ptr=NULL;
+	 	return Error;
+ 	}
+ 	ptr=&(L->element[tmp-2]);
+ 	return ptr;
  	
  } 
- 
+  /**
+ *@Function: 返回元素e的直接后继 
+ *@params  :  
+ *@return  :
+ *@note    : e是L的数据元素，且不是最后一个，则用ptr返回它的前驱，否则操作失败ptr无定义 
+ */
+ ElementType* NextElem_Sequence(SEQUENCELIST_Ptr L,ElementType e)
+ {
+ 	ElementType *ptr=NULL;
+ 	int tmp=0;
+ 	tmp=LocateElement_Sequence(L,e);
+ 	if(tmp == L->length)
+ 	{
+	 	ptr=NULL;
+	 	return Error;
+ 	}
+ 	ptr=&(L->element[tmp]);
+ 	return ptr;
+ 	
+ } 
   
 /**
  *@Function: 插入元素，若表长为n，则时间复杂度O(n)  
@@ -268,6 +297,7 @@ Status ListDelete_Sequence(SEQUENCELIST_Ptr L,int pos)
  */ 
 void SequenceList_Test(void)
 {
+	ElementType *ptr=NULL;
 	SEQUENCELIST L,L1;//SEQUENCELIST_Ptr 此处如果定义结构体指针的话，不妥，结构体指针需要初始化，结构体成员指针也要初始化 
 	int i,a,b;	
 	printf("----------------------------------------------------\n");
@@ -337,7 +367,15 @@ void SequenceList_Test(void)
 		printf("L 不为空！！！\n");	
 	}	
 	printf("----------------------------------------------------\n");
-		
+	
+	ptr=PriorElem_Sequence(&L,501);	
+	printf("prior_ptr_addr = %p\n",ptr);
+	
+	printf("----------------------------------------------------\n");
+	
+	ptr=NextElem_Sequence(&L,501);
+	printf("next_ptr_addr = %p\n",ptr);	
+	
 }
  
 

@@ -16,19 +16,14 @@
 <Folder name="Global Files">
 	<File>defines.h</File>
 </Folder>
-<Attribute topline="7" x="22" y="15">main.c</Attribute>
-<Attribute topline="135" x="68" y="169">SequenceList.c</Attribute>
+<Attribute topline="1" x="11" y="22">main.c</Attribute>
+<Attribute topline="352" x="4" y="368">SequenceList.c</Attribute>
 <Attribute topline="37" x="11" y="43">LinkList.c</Attribute>
 <Attribute topline="1" x="2" y="11">SequenceList.h</Attribute>
 <Attribute topline="1" x="26" y="15">Includes.h</Attribute>
 <Attribute topline="1" x="20" y="8">LinkList.h</Attribute>
 <Attribute topline="1" x="24" y="5">defines.h</Attribute>
 <FolderState>111</FolderState>
-<Breakpoint>
-	<File>main.c</File>
-	<Line>15</Line>
-	<Condition></Condition>
-</Breakpoint>
 <DefConfig>mingw5</DefConfig>
 <Builder name="mingw5" type="MinGW" version="1.0">
 	<TargetName>DataStructSection1</TargetName>
